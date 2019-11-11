@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: nataly_cakes
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: elkon
+Implementation-Vendor-Id: com.easytech.nataly_cakes
+Build-Jdk: 1.8.0_201
+Implementation-URL: http://projects.spring.io/spring-boot/nataly_cakes
+ /
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
