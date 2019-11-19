@@ -1,0 +1,8 @@
+<section class="cards">
+  <article *ngFor="let card of cards" class="card">
+    <a routerLink="" (click)="onCategory(card.category)" >
+      <img src="{{ card.img }}" alt="" />
+      <h3 class="card__title">{{ card.title }}</h3>
+    </a>  
+  </article>
+</section>

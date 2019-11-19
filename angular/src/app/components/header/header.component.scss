@@ -1,0 +1,50 @@
+$first-color : #bd71c7;
+$second-color : #4e2b4b;
+$third-color : #120913;
+
+nav {
+    background: $first-color;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    ul {
+      display: flex;
+      li {
+        padding-left: 1rem;
+        list-style: none;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+    .logo {
+      width: 100px;
+    }
+    
+}
+
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @media (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
