@@ -1,6 +1,7 @@
 package com.easytech.nataly_cakes.api;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,14 +33,16 @@ public class ProductApi {
 		productController.createProduct(product, userDataCache);
 	}
 	@GetMapping ("/{productId}")
-	public void getProductById(@RequestParam("token") int token,@PathVariable("productId") long id,HttpServletRequest request) throws ApplicationException, ParseException {
-		UserDataCashe userDataCache = (UserDataCashe) request.getAttribute("userData");
-		productController.getProductById(userDataCache, id);
+	public Product getProductById(@PathVariable("productId") long id) throws ApplicationException, ParseException {
+		return productController.getProductById(id);
 	}
 	@GetMapping 
-	public void getAllProducts(@RequestParam("token") int token, HttpServletRequest request) throws ApplicationException, ParseException {
-		UserDataCashe userDataCache = (UserDataCashe) request.getAttribute("userData");
-		productController.getAllProducts(userDataCache);
+	public ArrayList<Product> getAllProducts() throws ApplicationException, ParseException {
+		return productController.getAllProducts();
+	}
+	@GetMapping ("/type")
+	public ArrayList<Product> getAllProductsByType(@RequestParam("type") String productType) throws ApplicationException, ParseException {
+		return productController.getAllProductsByType(productType);
 	}
 	@PutMapping
 	public void updateProduct(@RequestParam("token") int token,@RequestBody Product product,HttpServletRequest request) throws ApplicationException{

@@ -183,6 +183,41 @@ public class ProductDao {
 			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
 		}
 	}
+	public ArrayList<Product> getAllProductsByType(String productTypeStr) throws ApplicationException, ParseException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = JdbcUtils.getConnection();
+
+			String sqlStatement = "SELECT * FROM products where productType=?";
+
+			preparedStatement = connection.prepareStatement(sqlStatement);
+			preparedStatement.setString(1, productTypeStr);
+			resultSet = preparedStatement.executeQuery();
+			
+			ArrayList<Product> allProducts = new ArrayList<Product>();
+			while (resultSet.next()) {
+			long productID = resultSet.getLong("id");
+			String name = resultSet.getString("name");
+			String description = resultSet.getString("description");
+			String image = resultSet.getString("image");
+			double price = resultSet.getDouble("price");
+			ProductType productType = ProductType.valueOf(resultSet.getString("productType"));
+
+			Product product = new Product(productType, name, price, description, productID, image);
+			allProducts.add(product);
+			}
+			
+			return allProducts;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ApplicationException(e, ErrorType.GENERAL_ERROR, "Please try again later");
+		} finally {
+			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
+		}
+	}
 	public void deleteProduct(long productID) throws ApplicationException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

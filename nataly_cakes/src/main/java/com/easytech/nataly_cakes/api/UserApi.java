@@ -2,6 +2,8 @@ package com.easytech.nataly_cakes.api;
 
 
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,11 @@ public class UserApi {
 	@PostMapping("/login")
 	public UserDataClient login(@RequestBody LogIn login) throws ApplicationException {
 		return userController.login(login);
+	}
+	@GetMapping
+	public User getUser(@RequestParam("token") int token,HttpServletRequest request) throws ApplicationException, ParseException{
+		UserDataCashe userDataCache = (UserDataCashe) request.getAttribute("userData");
+		return userController.getUserById(userDataCache,userDataCache.getUserID());
 	}
 	@PutMapping
 	public void updateUser(@RequestParam("token") int token,@RequestBody User user,HttpServletRequest request) throws ApplicationException{

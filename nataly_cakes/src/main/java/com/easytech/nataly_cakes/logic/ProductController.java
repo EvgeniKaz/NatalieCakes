@@ -18,11 +18,18 @@ public class ProductController {
 	private ProductDao productDao = new ProductDao();
 
 	private boolean isCreateProductValid(Product product, UserDataCashe userDataCashe) throws ApplicationException {
-
+		if (product.getPrice() < 0) {
+			throw new ApplicationException(ErrorType.NEGATIVE_VALUE,
+					"Sorry, price of the product cant be negative value, you entered" + product.getPrice());
+		}
 		return true;
 	}
-	private boolean isUpdateProductValid(Product product, UserDataCashe userDataCashe) throws ApplicationException {
 
+	private boolean isUpdateProductValid(Product product, UserDataCashe userDataCashe) throws ApplicationException {
+		if (product.getPrice() < 0) {
+			throw new ApplicationException(ErrorType.NEGATIVE_VALUE,
+					"Sorry, price of the product cant be negative value, you entered" + product.getPrice());
+		}
 		return true;
 	}
 
@@ -32,18 +39,27 @@ public class ProductController {
 		} else
 			throw new ApplicationException(ErrorType.FAILED_CREATE, " failed create product");
 	}
-	public ArrayList<Product> getAllProducts(UserDataCashe userDataCashe) throws ApplicationException, ParseException {
+
+	public ArrayList<Product> getAllProducts() throws ApplicationException, ParseException {
 		return productDao.getAllProducts();
 	}
-	public Product getProductByName(UserDataCashe userDataCashe, String productName) throws ApplicationException, ParseException {
+
+	public Product getProductByName(String productName)
+			throws ApplicationException, ParseException {
 		return productDao.getProductByName(productName);
 	}
-	public Product getProductById(UserDataCashe userDataCashe, long productId) throws ApplicationException, ParseException {
+	public ArrayList<Product> getAllProductsByType(String productType) throws ApplicationException, ParseException{
+		return productDao.getAllProductsByType(productType);
+	}
+
+	public Product getProductById(long productId) throws ApplicationException, ParseException {
 		return productDao.getOneProduct(productId);
 	}
+
 	public void deleteProduct(UserDataCashe userDataCashe, long productId) throws ApplicationException {
 		productDao.deleteProduct(productId);
 	}
+
 	public void updateProduct(Product product, UserDataCashe userDataCashe) throws ApplicationException {
 		if (isUpdateProductValid(product, userDataCashe)) {
 			productDao.updateProduct(product);

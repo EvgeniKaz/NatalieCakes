@@ -37,7 +37,20 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response); // Just continue chain.
 			return;
 
-		} else {
+		} 
+		if (path.startsWith("/product") && req.getMethod().equalsIgnoreCase("get")) {
+
+			chain.doFilter(request, response); // Just continue chain.
+			return;
+
+		}
+		if (path.startsWith("/calculate")) {
+
+			chain.doFilter(request, response); // Just continue chain.
+			return;
+
+		}
+		else {
 			
 			Integer token = Integer.parseInt(req.getParameter("token"));
 

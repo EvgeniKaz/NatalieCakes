@@ -59,6 +59,7 @@ public class UserController {
 	public void deleteUser(UserDataCashe userDataCashe, long userId) throws ApplicationException {
 		userDao.deleteUser(userId);
 	}
+	
 	public void updateUser(User user, UserDataCashe userDataCashe) throws ApplicationException {
 		if (isUpdateUsertValid(user, userDataCashe)) {
 			userDao.updateUser(user);
